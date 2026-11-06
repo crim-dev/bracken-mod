@@ -16,7 +16,7 @@ trap 'rm -rf "$WORKDIR"' EXIT
 BUILD_DIR="$ROOT_DIR/build"
 mkdir -p "$BUILD_DIR"
 
-rm -f "$BUILD_DIR/thebrackenpack_dev.jar"
+# rm -f "$BUILD_DIR/thebrackenpack_dev.jar"
 
 ln -s "$ROOT_DIR/assets/assets" "$WORKDIR/assets"
 ln -s "$ROOT_DIR/datapack/data" "$WORKDIR/data"
@@ -27,7 +27,9 @@ for f in "$ROOT_DIR"/metadata/*; do
     ln -s "$f" "$WORKDIR/$(basename "$f")"
 done
 
+COMMIT_HASH=$(git rev-parse --short HEAD)
+
 (
     cd "$WORKDIR"
-    zip -r "$BUILD_DIR/thebrackenpack_dev.jar" .
+    zip -r "$BUILD_DIR/thebrackenpack_dev-$COMMIT_HASH.jar" .
 )
