@@ -13,3 +13,5 @@ zip thebrackenpack_dev.zip -r \
   ./data pack.mcmeta pack.png "SPECIAL THANKS.md" \
 
 cd ../
+
+mv datapack/thebrackenpack_dev.zip ./build/thebrackenpack_dev.zip

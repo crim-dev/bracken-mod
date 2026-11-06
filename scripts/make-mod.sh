@@ -7,6 +7,8 @@ if [[ ! -f "scripts/make-mod.sh" ]]; then
     exit 1
 fi
 
+# Create copy of relevant files in temporary directory and build from there
+
 ROOT_DIR=$(pwd -P)
 WORKDIR=$(mktemp -d)
 trap 'rm -rf "$WORKDIR"' EXIT
@@ -14,13 +16,11 @@ trap 'rm -rf "$WORKDIR"' EXIT
 BUILD_DIR="$ROOT_DIR/build"
 mkdir -p "$BUILD_DIR"
 
-# Mod assets
-ln -s "$ROOT_DIR/assets/assets" "$WORKDIR/assets"
+rm -f "$BUILD_DIR/thebrackenpack_dev.jar"
 
-# Datapack resources
+ln -s "$ROOT_DIR/assets/assets" "$WORKDIR/assets"
 ln -s "$ROOT_DIR/datapack/data" "$WORKDIR/data"
 
-# Mod metadata
 for f in "$ROOT_DIR"/metadata/*; do
     [[ -e "$f" ]] || continue
     ln -s "$f" "$WORKDIR/$(basename "$f")"
