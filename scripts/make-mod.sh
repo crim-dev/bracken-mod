@@ -20,6 +20,7 @@ rm -f "$BUILD_DIR/thebrackenpack_dev.jar"
 
 ln -s "$ROOT_DIR/assets/assets" "$WORKDIR/assets"
 ln -s "$ROOT_DIR/datapack/data" "$WORKDIR/data"
+ln -s "$ROOT_DIR/datapack/pack.png" "$WORKDIR/pack.png"
 
 for f in "$ROOT_DIR"/metadata/*; do
     [[ -e "$f" ]] || continue
