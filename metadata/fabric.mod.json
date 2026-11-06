@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "the-bracken-pack-mod_dev",
+  "version": "26.3",
+  "name": "the-bracken-pack-mod_dev",
+  "description": "By BrackenStrike!",
+  "license": "LicenseRef-Datapack",
+  "environment": "*",
+  "depends": {
+    "fabric-resource-loader-v0": "*"
+  },
+  "icon": "pack.png",
+  "contact": {
+    "homepage": "https://modrinth.com/datapack/the-bracken-pack",
+    "sources": "https://github.com/crim-dev/bracken-mod",
+    "issues": "https://github.com/crim-dev/bracken-mod/issues"
+  }
+}

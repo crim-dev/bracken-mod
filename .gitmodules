@@ -1,0 +1,6 @@
+[submodule "assets"]
+	path = assets
+	url = https://github.com/BrackenStrike/bracken-pack-resourcepack
+[submodule "datapack"]
+	path = datapack
+	url = https://github.com/BrackenStrike/BrackenPack
