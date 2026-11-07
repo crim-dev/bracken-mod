@@ -14,6 +14,7 @@ zip thebrackenpack_dev.zip -r \
 
 cd ../
 
-COMMIT_HASH=$(cd datapack && git rev-parse --short HEAD)
+DP_COMMIT_HASH=$(cd datapack && git rev-parse --short HEAD)
+MOD_COMMIT_HASH=$(git rev-parse --short HEAD)
 
-mv datapack/thebrackenpack_dev.zip ./build/thebrackenpack_dev-$COMMIT_HASH.zip
+mv datapack/thebrackenpack_dev.zip ./build/thebrackenpack_dev-$MOD_COMMIT_HASH-$DP_COMMIT_HASH.zip

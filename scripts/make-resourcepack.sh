@@ -14,6 +14,7 @@ zip bprp_dev.zip -r \
 
 cd ../
 
-COMMIT_HASH=$(cd assets && git rev-parse --short HEAD)
+RP_COMMIT_HASH=$(cd assets && git rev-parse --short HEAD)
+MOD_COMMIT_HASH=$(git rev-parse --short HEAD)
 
-mv assets/bprp_dev.zip ./build/bprp_dev-$COMMIT_HASH.zip
+mv assets/bprp_dev.zip ./build/bprp_dev-$MOD_COMMIT_HASH-$RP_COMMIT_HASH.zip
