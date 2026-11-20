@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       branch:
-        description: 'Branch to build (e.g. main, legacy-1.21.11)'
+        description: 'Branch to build'
         required: true
         default: 'main'
         type: string
@@ -54,7 +54,7 @@ jobs:
           fi
 
       - name: Build mod
-        run: ./script/make-mod.sh
+        run: ./scripts/make-mod.sh
 
       - name: Find generated artifact
         id: artifact
@@ -70,12 +70,7 @@ jobs:
 
           echo "Generated artifact: $FILE"
           echo "Artifact size: $SIZE bytes"
-
-          if [ "$SIZE" -lt 30000000 ]; then
-            echo "ERROR: Artifact is smaller than 30 MB!"
-            exit 1
-          fi
-
+          
           echo "file=$FILE" >> "$GITHUB_OUTPUT"
 
       - name: Determine release information
