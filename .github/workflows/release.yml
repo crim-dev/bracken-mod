@@ -1,0 +1,67 @@
+
+name: Build and Release
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && github.ref || github.ref }}
+
+      - name: Set up environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y zip
+
+      - name: Build mod
+        run: ./script/make-mod.sh
+
+      - name: Find generated artifact
+        id: artifact
+        run: |
+          FILE=$(find build -maxdepth 1 -type f -name 'thebrackenpack_dev-*.jar' | head -n 1)
+
+          if [ -z "$FILE" ]; then
+            echo "No build artifact found!"
+            exit 1
+          fi
+
+          echo "file=$FILE" >> "$GITHUB_OUTPUT"
+
+      - name: Determine release information
+        id: release
+        run: |
+          if [[ "$GITHUB_REF_TYPE" == "tag" ]]; then
+            echo "tag=$GITHUB_REF_NAME" >> "$GITHUB_OUTPUT"
+            echo "name=$GITHUB_REF_NAME" >> "$GITHUB_OUTPUT"
+            echo "prerelease=false" >> "$GITHUB_OUTPUT"
+          else
+            BRANCH="${GITHUB_REF_NAME//\//-}"
+            SHORT_SHA="${GITHUB_SHA:0:7}"
+
+            echo "tag=${BRANCH}-${SHORT_SHA}" >> "$GITHUB_OUTPUT"
+            echo "name=${BRANCH}-${SHORT_SHA}" >> "$GITHUB_OUTPUT"
+            echo "prerelease=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.release.outputs.tag }}
+          name: ${{ steps.release.outputs.name }}
+          prerelease: ${{ steps.release.outputs.prerelease }}
+          files: ${{ steps.artifact.outputs.file }}
+          generate_release_notes: true
+          fail_on_unmatched_files: true
