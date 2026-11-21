@@ -17,15 +17,15 @@ git clone https://github.com/crim-dev/bracken-mod --recurse-submodules
 For the sake of convenience we have decided to keep track of four versions :
 
 | Version | Matching dp+rp versions  |
-|---------|----------|
-| 26.1.2  |    |
-| 1.21.11 | Data 2   |
-| 1.21.1  | Data 3   |
-| 1.20.1  | Data 3   |
+|---------|------------|
+| 26.1.2  | v127 / v73 |
+| 1.21.11 | v126 / v72 |
+| 1.21.1  | v112 / v59 |
+| 1.20.1  | v90 / v35  |
 
 Each one has its own branch on this repository.
 
-All four of these versions are intended to receive full backports of the latest features of the Bracken Pack. I cannot guarantee when that will happen, but I 
+All four of these versions are intended to receive full backports of the latest features of the Bracken Pack. I cannot guarantee when that will happen, but I certainly intend to do that progressively. Any help is welcome.
 
 ## Dependencies
 
